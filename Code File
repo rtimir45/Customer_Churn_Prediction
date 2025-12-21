@@ -1,0 +1,55 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+
+df = pd.read_csv("customer_churn.csv")
+df.head()
+
+
+df.info()
+df.describe()
+df.isnull().sum()
+
+df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
+df.dropna(inplace=True)
+
+sns.countplot(x='Churn', data=df)
+plt.title("Churn Distribution")
+plt.show()
+
+sns.countplot(x='Contract', hue='Churn', data=df)
+plt.title("Churn by Contract Type")
+plt.show()
+
+le = LabelEncoder()
+
+for col in df.select_dtypes(include='object').columns:
+    df[col] = le.fit_transform(df[col])
+
+X = df.drop(['Churn', 'customerID'], axis=1)
+y = df['Churn']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+
+sample_customer = X.iloc[0:1]
+prediction = model.predict(sample_customer)
+
+print("Churn Prediction:", "Yes" if prediction[0] == 1 else "No")
