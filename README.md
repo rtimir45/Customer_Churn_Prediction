@@ -1,13 +1,12 @@
 # Customer_Churn_Prediction
 Customer Churn Prediction using python
-Below is a **complete, beginner-friendly `README.md`** you can directly copy and upload to your **GitHub Customer Churn Prediction project**.
-It is **well-structured, professional, and CV-ready**.
+
 
 ---
 
-# 📉 Customer Churn Prediction Using Machine Learning
+# Customer Churn Prediction Using Machine Learning
 
-## 📌 Project Overview
+# Project Overview
 
 Customer churn refers to customers who stop using a company’s service.
 This project builds a **machine learning classification model** to predict whether a customer will **churn or not**, based on their demographic information, account details, and service usage.
