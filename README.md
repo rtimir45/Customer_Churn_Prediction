@@ -62,7 +62,7 @@ Predicting churn helps businesses take proactive steps to retain customers.
 
 # Target Variable
 
-  -`Churn` → Yes / No
+  -`Churn` -> Yes / No
 
 
 
@@ -134,4 +134,4 @@ pip install -r requirements.txt
 
  #License
 
- This project is open-source and intended for educational purposes.
+ This project is open-source and  for educational purposes.
