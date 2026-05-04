@@ -152,18 +152,6 @@ Contributions are welcome! Feel free to fork this repo and submit a pull request
 
 ## 📜 License
 
-This project is open-source.
-
----
+This project is open-source and  for educational purposes.
 
 
-
-
-
- #Tools: Python, Pandas, Seaborn, Scikit-learn
-
-
-
- #License
-
- This project is open-source and  for educational purposes.
