@@ -1,55 +1,61 @@
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 
+DF = pd.read_csv('Customer_Churn.csv')
+print(DF.head())
 
-df = pd.read_csv("customer_churn.csv")
-df.head()
+print(DF.info())
+print(DF.describe)
 
+print(DF.isnull().sum())
+print('Total Null Values: ',DF.isnull().sum().sum())
+print('Duplicate values: ',DF.duplicated().sum())
 
-df.info()
-df.describe()
-df.isnull().sum()
+print('Mean of CreditScore: ',DF['CreditScore'].mean())
+print('\nMean of Age: ',DF['Age'].mean())
+print('\nMean of Tenure: ',DF['Tenure'].mean())
+print('\nMode of NumOProducts: ',DF['NumOfProducts'].mode()[0])
+print('\nMode of HasCrCard',DF['HasCrCard'].mode()[0])
 
-df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
-df.dropna(inplace=True)
+DF['CreditScore'] = DF['CreditScore'].fillna(DF['CreditScore'].mean())
 
-sns.countplot(x='Churn', data=df)
-plt.title("Churn Distribution")
-plt.show()
+DF['Age'] = DF['Age'].fillna(DF['Age'].mean())
 
-sns.countplot(x='Contract', hue='Churn', data=df)
-plt.title("Churn by Contract Type")
-plt.show()
+DF['Tenure'] = DF['Tenure'].fillna(DF['Tenure'].mean())
+
+DF['NumOfProducts'] = DF['NumOfProducts'].fillna(DF['NumOfProducts'].mode()[0])
+
+DF['HasCrCard'] = DF['HasCrCard'].fillna(DF['HasCrCard'].mode()[0])
+
+print(DF.isnull().sum().sum())
 
 le = LabelEncoder()
 
-for col in df.select_dtypes(include='object').columns:
-    df[col] = le.fit_transform(df[col])
+DF['Gender'] = le.fit_transform(DF['Gender'])
+DF['Geography'] = le.fit_transform(DF['Geography'])
 
-X = df.drop(['Churn', 'customerID'], axis=1)
-y = df['Churn']
+DF = DF.drop(columns = ['Surname'])
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
+X = DF.drop(columns = ['Leave'])
+y = DF['Leave']
 
-model = LogisticRegression(max_iter=1000)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 45)
+
+model = RandomForestClassifier(random_state = 45, n_estimators = 500)
+
 model.fit(X_train, y_train)
 
 y_pred = model.predict(X_test)
 
-print("Accuracy:", accuracy_score(y_test, y_pred))
-print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
-print("\nClassification Report:\n", classification_report(y_test, y_pred))
+acc = accuracy_score(y_test, y_pred)
+print('Accuracy: ', acc*100)
 
-sample_customer = X.iloc[0:1]
-prediction = model.predict(sample_customer)
+CR = classification_report(y_test, y_pred)
+print(CR)
 
-print("Churn Prediction:", "Yes" if prediction[0] == 1 else "No")
+print('Confusion Matrix\n', confusion_matrix(y_test, y_pred))
+
