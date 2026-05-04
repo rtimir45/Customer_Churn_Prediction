@@ -1,130 +1,162 @@
-# Customer_Churn_Prediction
-Customer Churn Prediction using python
 
+# 📊 Customer Churn Prediction
+
+A Machine Learning project that predicts whether a customer is likely to leave (churn) based on their demographic and banking behavior data. This helps businesses take proactive steps to retain customers.
 
 ---
 
-# Customer Churn Prediction Using Machine Learning
+## 🚀 Project Overview
 
-# Project Overview
+Customer churn is a critical problem in industries like banking and telecom. In this project, we:
 
-Customer churn refers to customers who stop using a company’s service.
-This project builds a **machine learning classification model** to predict whether a customer will **churn or not**, based on their demographic information, account details, and service usage.
+* Analyze customer data
+* Perform data preprocessing and cleaning
+* Train a Machine Learning model
+* Predict whether a customer will leave or stay
 
-Predicting churn helps businesses take proactive steps to retain customers.
+---
+
+## 📂 Dataset
+
+* File: `Customer_Churn.csv`
+* Contains customer-related attributes such as:
+
+  * Credit Score
+  * Geography
+  * Gender
+  * Age
+  * Tenure
+  * Balance
+  * Number of Products
+  * Credit Card Status
+  * Active Membership
+  * Estimated Salary
+  * Target Variable: `Leave` (Churn)
+
+---
+
+## ⚙️ Technologies Used
+
+* Python 🐍
+* Pandas
+* Scikit-learn
+* XGBoost
+* NumPy
+
+---
+
+## 🧠 Machine Learning Model
+
+* **Algorithm Used:** Random Forest Classifier
+* **Alternative Model :** XGBoost Classifier
+* **Train-Test Split:** 80% training / 20% testing
+* **Evaluation Metrics:**
+
+  * Accuracy Score
+  * Classification Report
+  * Confusion Matrix
+
+---
+
+## 🔄 Workflow
+
+1. **Data Loading**
+
+   ```python
+   pd.read_csv('Customer_Churn.csv')
+   ```
+
+2. **Data Exploration**
+
+   * Head, info, description
+   * Null value check
+   * Duplicate check
+
+3. **Data Cleaning**
+
+   * Filled missing values:
+
+     * Mean → Numerical columns
+     * Mode → Categorical columns
+
+4. **Feature Encoding**
+
+   * Label Encoding for:
+
+     * Gender
+     * Geography
+
+5. **Feature Selection**
+
+   * Dropped unnecessary column: `Surname`
+
+6. **Model Training**
+
+   ```python
+   RandomForestClassifier(n_estimators=500)
+   ```
+
+7. **Model Evaluation**
+
+   * Accuracy Score
+   * Classification Report
+   * Confusion Matrix
+
+---
+
+## 📈 Results
+
+* Model achieves 86% accuracy in predicting customer churn
+* Provides insights into customer retention patterns
+
+---
+
+## ▶️ How to Run
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/customer-churn-prediction.git
+   cd customer-churn-prediction
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   pip install pandas scikit-learn xgboost
+   ```
+
+3. Run the script:
+
+   ```bash
+   python ccp.py
+   ```
+
+---
+
+## 📌 Future Improvements
+
+* Hyperparameter tuning
+* Feature engineering
+* Model comparison (XGBoost vs Random Forest)
+* Deployment using Streamlit
+* Real-time prediction system
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to fork this repo and submit a pull request.
+
+---
+
+## 📜 License
+
+This project is open-source.
+
+---
 
 
-
-# Objective
-
-* Analyze customer data to understand churn patterns
-* Build a machine learning model to predict customer churn
-* Evaluate model performance using classification metrics
-
-
-# Skills & Concepts Covered
-
-* Data Cleaning & Preprocessing
-* Exploratory Data Analysis (EDA)
-* Encoding Categorical Variables
-* Train-Test Split
-* Logistic Regression (Classification)
-* Model Evaluation
-
-
-# Tools & Libraries Used
-
-* **Python**
-* **Pandas**
-* **NumPy**
-* **Matplotlib**
-* **Seaborn**
-* **Scikit-learn**
-
-
-
-# Dataset
-
-* **Name:** Telco Customer Churn Dataset
-* **File:** `customer_churn.csv`
-* **Source:** Kaggle (public dataset)
-
-# Key Features
-
-* `gender`
-* `SeniorCitizen`
-* `Partner`
-* `Dependents`
-* `tenure`
-* `Contract`
-* `MonthlyCharges`
-* `TotalCharges`
-
-# Target Variable
-
-  -`Churn` -> Yes / No
-
-
-
-## ⚙️ Data Preprocessing
-
-* Converted `TotalCharges` to numeric
-* Handled missing values
-* Encoded categorical variables using `LabelEncoder`
-* Removed unnecessary columns like `customerID`
-
-
-# Machine Learning Model
-
- - **Algorithm Used:** Logistic Regression
- - **Problem Type:** Binary Classification
-
-
-
-# Model Evaluation Metrics
-
- -Accuracy Score
- -Confusion Matrix
- -Precision, Recall, F1-Score
-
-These metrics help evaluate how well the model predicts customer churn.
-
-
-
-#Sample Prediction
-
-The trained model can predict whether a customer is likely to churn based on their input features.
-
-Example output:
-
-```
-Churn Prediction: Yes
-```
-
-
-# How to Run the Project
-
-1. Install required libraries:
-
-```bash
-pip install -r requirements.txt
-```
-
-2. Run the Code file
-
-
-# Results & Insights
-
- -Customers with **month-to-month contracts** show higher churn
- -Long-term customers are less likely to churn
- -Contract type and tenure are strong churn indicators
-
-
-
-#Future Improvements
-
-  -Use advanced models like Random Forest or XGBoost
-  -Perform feature importance analysis
 
 
 
